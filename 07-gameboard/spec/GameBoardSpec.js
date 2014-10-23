@@ -1,3 +1,78 @@
+
+
+
+describe("Clase GameBoard", function(){
+
+    var canvas, ctx;
+
+    beforeEach(function(){
+
+
+	loadFixtures('index.html');
+
+	canvas = $('#game')[0];
+	expect(canvas).toExist();
+
+	ctx = canvas.getContext('2d');
+	expect(ctx).toBeDefined();
+	board = new GameBoard();
+	oldGame = Game;
+    });
+
+    afterEach(function(){
+	Game = oldGame;
+    }); 
+
+it("objects", function(){
+	
+
+	obj = {};
+	expect(board.objects).toEqual([]);
+
+	board.add(obj);
+	expect(board.objects.length).toEqual(1);
+
+});		
+
+it("overlap", function(){
+	
+	o1 = {x: 50, y: 50, h: 25, w:25};
+	o2 = {x: 50, y: 60, h: 25, w:25};
+
+
+	expect(board.overlap(o1, o2)).toBeTruthy();
+
+	o1 = {x: 150, y: 150, h: 25, w: 25};
+	o2 = {x: 50, y: 100, h: 25, w: 25};
+
+	expect(board.overlap(o1, o2)).toBeFalsy();
+
+
+});
+
+it("draw", function(){
+
+	
+	spyOn(board, 'iterate');
+	board.draw(ctx);	
+	expect(board.iterate).toHaveBeenCalled();
+	expect(board.iterate).toHaveBeenCalledWith('draw', ctx);
+
+
+});
+
+
+it("step", function(){
+
+	spyOn(board, 'iterate');
+	board.step(1);
+	expect(board.iterate).toHaveBeenCalled();
+	expect(board.iterate).toHaveBeenCalledWith('step',1);
+
+
+
+});
+});
 /*
 
   En el anterior prototipo (06-player), el objeto Game permite
@@ -54,5 +129,7 @@
     pueda identificar de qué tipo es cada objeto sprite almacenado en
     el tablero de juegos, pues cada objeto sólo quiere comprobar si ha
     colisionado con objetos de cierto tipo, no con todos los objetos.
-
 */
+
+
+
