@@ -111,6 +111,37 @@ it("remove", function(){
 
 });
 
+it("collide", function(){
+
+
+	o1 = {x: 50, y: 50, h: 25, w:25};
+	o2 = {x: 50, y: 60, h: 25, w:25};
+
+	board.add(o1);
+	board.add(o2);
+
+	spyOn(board, 'detect');
+	board.collide(o1);
+
+	expect(board.detect).toHaveBeenCalled();
+
+});
+
+
+
+it("detect", function(){
+
+	o1 = {x: 50, y: 50, h: 25, w:25};
+	o2 = {x: 50, y: 60, h: 25, w:25};
+
+	board.add(o1);
+	board.add(o2);
+	func = function() { return true};
+
+	expect(board.detect(func)).toEqual(o1);
+	expect(board.detect(func)).not.toEqual(o2);
+
+});
 });
 /*
 
