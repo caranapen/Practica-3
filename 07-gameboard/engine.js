@@ -9,11 +9,12 @@
 // puntuación o el número de vidas.
 
 
-
+var _;
 
 // Objeto singleton Game: se guarda una unica instancia del
 // constructor anónimo en el objeto Game
 var Game = new function() {                                                                  
+	
 
     // Inicializa el juego
     this.initialize = function(canvasElementId,sprite_data,callback) {

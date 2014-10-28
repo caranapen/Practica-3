@@ -71,6 +71,26 @@ it("step", function(){
 
 
 
+
+});
+
+
+it("iterate", function(){
+
+	var obj = {
+	    step: function (){},
+	    draw: function (){}
+	};
+	spyOn(obj, 'step');
+
+	board.add(obj) ;
+
+	board.iterate('step', 5);
+
+	expect(obj.step).toHaveBeenCalled();
+	expect(obj.step).toHaveBeenCalledWith(5);
+
+
 });
 });
 /*
