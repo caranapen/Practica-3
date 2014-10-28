@@ -92,6 +92,25 @@ it("iterate", function(){
 
 
 });
+
+it("remove", function(){
+
+	var obj = {
+	    step: function (){},
+	    draw: function (){}
+	};
+	
+
+	board.add(obj) ;
+
+	board.resetRemoved();
+	board.remove(obj);
+	board.finalizeRemoved();
+
+	expect(board.objects).toEqual([]);
+
+});
+
 });
 /*
 
