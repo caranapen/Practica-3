@@ -100,7 +100,7 @@ var PlayerShip = function() {
     this.x = Game.width/2 - this.w / 2;
     this.y = Game.height - 10 - this.h;
     this.vx = 0;
-
+	var up = false;	
     this.reloadTime = 0.25;  // Un cuarto de segundo para poder volver a disparar
     this.reload = this.reloadTime;
 
@@ -117,19 +117,19 @@ var PlayerShip = function() {
 	else if(this.x > Game.width - this.w) { 
 	    this.x = Game.width - this.w 
 	}
- 																			// dt = 0.03 s
-	this.reload-=dt; 														// reload = 0.25 - 0.03 = 0.22
-										
-	if(Game.keys['fire'] && this.reload < 0) {								// si pulso espacio y reload < 0
-	    // Esta pulsada la tecla de disparo y ya ha pasado el tiempo reload
-		console.log(Game.keys['fire'])
-	    Game.keys['fire'] = false;
-	    this.reload = this.reloadTime;										// reload = 0.25	
+ 																		
+	this.reload-=dt; 		// reload = 0.25 - 0.03 = 0.22
+																		
+	if (!Game.keys['fire']) up = true;					
+	if(up && Game.keys['fire'] && this.reload < 0) {		// si pulso espacio y reload < 0				
+		up = false;
+	    this.reload = this.reloadTime;			// reload = 0.25								
 
-		console.log(Game.keys['fire'])	
 	    // Se añaden al gameboard 2 misiles 
+		
 	    this.board.add(new PlayerMissile(this.x,this.y+this.h/2));
 	    this.board.add(new PlayerMissile(this.x+this.w,this.y+this.h/2));
+		
 	}
     }
 

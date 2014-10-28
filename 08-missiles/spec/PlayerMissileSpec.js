@@ -21,7 +21,7 @@ describe("Clase GameBoard", function(){
 it("posicion inicial", function(){
 
 	
-	missile = new PlayerMissile(141.5, 449);
+	var missile = new PlayerMissile(141.5, 449);
 	expect(missile.w).toEqual(2);
 	expect(missile.h).toEqual(10);
 	expect(missile.x).toEqual(140.5);
@@ -31,7 +31,7 @@ it("posicion inicial", function(){
 
 it("step", function(){
 
-	missile = new PlayerMissile(141.5, 449);
+	var missile = new PlayerMissile(141.5, 449);
 	missile.step(0.03);
 	expect(missile.y).toEqual(418);
 	missile.step(0.5);
@@ -43,14 +43,33 @@ it("draw", function(){
 
 	spyOn(SpriteSheet, "draw");
 
-	missile = new PlayerMissile(141.5, 449);
+	var missile = new PlayerMissile(141.5, 449);
 	missile.draw();
 	expect(SpriteSheet.draw).toHaveBeenCalled();
  	expect(SpriteSheet.draw.calls[0].args[1]).toEqual("missile");
  	expect(SpriteSheet.draw.calls[0].args[2]).toEqual(140.5);
  	expect(SpriteSheet.draw.calls[0].args[3]).toEqual(439);
 
+
 });
+
+/*
+it("Espacio pulsado", function(){
+
+
+	var miNave = new PlayerShip();
+	var missile = new PlayerMissile(141.5, 449);
+	spyOn(missile, "step");
+
+	Game = {keys: {'fire': false}};
+	miNave.step(2);
+
+	Game = {keys: {'fire': true}};
+	miNave.step(2);
+
+	expect(missile.step).toHaveBeenCalled();
+
+});*/
 });
 
 
