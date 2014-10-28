@@ -141,6 +141,8 @@ it("detect", function(){
 	expect(board.detect(func)).toEqual(o1);
 	expect(board.detect(func)).not.toEqual(o2);
 
+	func = function() { return false};
+	expect(board.detect(func)).toEqual(false);
 });
 });
 /*
