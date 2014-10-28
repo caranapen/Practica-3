@@ -117,13 +117,16 @@ var PlayerShip = function() {
 	else if(this.x > Game.width - this.w) { 
 	    this.x = Game.width - this.w 
 	}
-
-	this.reload-=dt;
-	if(Game.keys['fire'] && this.reload < 0) {
+ 																			// dt = 0.03 s
+	this.reload-=dt; 														// reload = 0.25 - 0.03 = 0.22
+										
+	if(Game.keys['fire'] && this.reload < 0) {								// si pulso espacio y reload < 0
 	    // Esta pulsada la tecla de disparo y ya ha pasado el tiempo reload
+		console.log(Game.keys['fire'])
 	    Game.keys['fire'] = false;
-	    this.reload = this.reloadTime;
+	    this.reload = this.reloadTime;										// reload = 0.25	
 
+		console.log(Game.keys['fire'])	
 	    // Se añaden al gameboard 2 misiles 
 	    this.board.add(new PlayerMissile(this.x,this.y+this.h/2));
 	    this.board.add(new PlayerMissile(this.x+this.w,this.y+this.h/2));
@@ -140,17 +143,21 @@ var PlayerShip = function() {
 // forma solo existe una copia de cada uno para todos los misiles, y
 // no una copia para cada objeto misil
 var PlayerMissile = function(x,y) {
-    this.w = SpriteSheet.map['missile'].w;
-    this.h = SpriteSheet.map['missile'].h;
-    this.x = x - this.w/2; 
 
-    this.y = y - this.h; 
-    this.vy = -700;
+    this.w = SpriteSheet.map['missile'].w; // w = 2 px
+    this.h = SpriteSheet.map['missile'].h; // h = 10 px
+    this.x = x - this.w/2; 		   // inicial x = 141.5 - 1 = 140.5 px;
+
+    
+    this.y = y - this.h; 		   // inicial y = 449 - 10 = 439 px
+
+    this.vy = -700;			   // velocidad  = -700 m/s (el menos indica que va hacia arriba)
 };
 
 PlayerMissile.prototype.step = function(dt)  {
-    this.y += this.vy * dt;
-    if(this.y < -this.h) { this.board.remove(this); }
+					   // dt = 0.03 s
+    this.y += this.vy * dt;  	           // y = 439 -700 * 0.03 = 439 - 21 = 418 px (sube 21 pixeles cada 0.03 s)	
+    if(this.y < -this.h) { this.board.remove(this); } // si y es menor que -10 borramos sprite
 };
 
 PlayerMissile.prototype.draw = function(ctx)  {

@@ -1,3 +1,61 @@
+describe("Clase GameBoard", function(){
+
+    var canvas, ctx;
+
+    beforeEach(function(){
+
+	loadFixtures('index.html');
+
+	canvas = $('#game')[0];
+	expect(canvas).toExist();
+
+	ctx = canvas.getContext('2d');
+	expect(ctx).toBeDefined();
+	oldGame = Game;
+    });
+
+    afterEach(function(){
+	Game = oldGame;
+    }); 
+
+it("posicion inicial", function(){
+
+	
+	missile = new PlayerMissile(141.5, 449);
+	expect(missile.w).toEqual(2);
+	expect(missile.h).toEqual(10);
+	expect(missile.x).toEqual(140.5);
+	expect(missile.y).toEqual(439);
+
+});		
+
+it("step", function(){
+
+	missile = new PlayerMissile(141.5, 449);
+	missile.step(0.03);
+	expect(missile.y).toEqual(418);
+	missile.step(0.5);
+	expect(missile.y).toEqual(68);
+
+});
+
+it("draw", function(){
+
+	spyOn(SpriteSheet, "draw");
+
+	missile = new PlayerMissile(141.5, 449);
+	missile.draw();
+	expect(SpriteSheet.draw).toHaveBeenCalled();
+ 	expect(SpriteSheet.draw.calls[0].args[1]).toEqual("missile");
+ 	expect(SpriteSheet.draw.calls[0].args[2]).toEqual(140.5);
+ 	expect(SpriteSheet.draw.calls[0].args[3]).toEqual(439);
+
+});
+});
+
+
+
+
 /*
 
   Requisitos: 
