@@ -16,6 +16,7 @@ describe("Clase GameBoard", function(){
 	ctx = canvas.getContext('2d');
 	expect(ctx).toBeDefined();
 	board = new GameBoard();
+	SpriteSheet.load (sprites,function(){});
 	oldGame = Game;
     });
 

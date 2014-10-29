@@ -1,4 +1,4 @@
-describe("Clase GameBoard", function(){
+describe("Clase PlayerMissile", function(){
 
     var canvas, ctx;
 
@@ -11,6 +11,7 @@ describe("Clase GameBoard", function(){
 
 	ctx = canvas.getContext('2d');
 	expect(ctx).toBeDefined();
+	SpriteSheet.load (sprites,function(){});
 	oldGame = Game;
     });
 
