@@ -122,7 +122,7 @@ var PlayerShip = function() {
 																		
 	if (!Game.keys['fire']) up = true;					
 	if(up && Game.keys['fire'] && this.reload < 0) {		// si pulso espacio y reload < 0				
-		up = false;
+	    up = false;
 	    this.reload = this.reloadTime;			// reload = 0.25								
 
 	    // Se añaden al gameboard 2 misiles 

@@ -49,27 +49,27 @@ it("draw", function(){
  	expect(SpriteSheet.draw.calls[0].args[1]).toEqual("missile");
  	expect(SpriteSheet.draw.calls[0].args[2]).toEqual(140.5);
  	expect(SpriteSheet.draw.calls[0].args[3]).toEqual(439);
-
-
 });
 
-/*
-it("Espacio pulsado", function(){
+
+it("espacio pulsado", function(){
 
 
 	var miNave = new PlayerShip();
-	var missile = new PlayerMissile(141.5, 449);
-	spyOn(missile, "step");
+	var board =  new GameBoard();
+	board.add(miNave);
+	spyOn(board, 'add');
 
-	Game = {keys: {'fire': false}};
-	miNave.step(2);
 
 	Game = {keys: {'fire': true}};
-	miNave.step(2);
+	
+	miNave.step(0.22);
+	expect(board.add).not.toHaveBeenCalled();
 
-	expect(missile.step).toHaveBeenCalled();
+	miNave.step(0.04); // ya han pasado los 25 s
+	expect(board.add).toHaveBeenCalled();
 
-});*/
+});
 });
 
 
